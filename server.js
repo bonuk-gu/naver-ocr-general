@@ -155,13 +155,13 @@ function ptt(filepath) {
     return new Promise(resolve => {
         imageToBase64(filepath)
         .then((response) => {
-            const url = "https://251acafd6a0b47f6b7b963e40eec84c9.apigw.ntruss.com/custom/v1/6243/820e40bd5bc75cd1e8159211ebbfbca5530d141810ec0b1b4529acf4d9ec84af/general";
+            const url = "https://251acafd6a0b47f6b7b963e40eec84c9.apigw.ntruss.com/custom/v1/6244/2c9e33f62f455154fc1e74f8e78167950ba03644973cef2ca1ce80b9b4dfe6ba/infer";
             const requestConfig = {
                 url:url,
                 method:'POST',
                 headers: {
                     "Content-Type":"application/json",
-                    "X-OCR-SECRET": "YlNzc05LdnNxbkhKRHdSS1RVcUhBYklwRG5RRnZoQ3I="
+                    "X-OCR-SECRET": "aVNoa2xKVkxNa3hYYW55UFFmZGhabnhTZkxsbnZKeXM="
                 },
                 json: {
                     "version": "V1",
