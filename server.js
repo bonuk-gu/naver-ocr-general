@@ -149,19 +149,18 @@ function stt(language, filePath) {
 
 
 const imageToBase64 = require('image-to-base64');
-const { Base64 } = require('js-base64');
 
 function ptt(filepath) {
     return new Promise(resolve => {
         imageToBase64(filepath)
         .then((response) => {
-            const url = "https://251acafd6a0b47f6b7b963e40eec84c9.apigw.ntruss.com/custom/v1/6244/2c9e33f62f455154fc1e74f8e78167950ba03644973cef2ca1ce80b9b4dfe6ba/infer";
+            const url = "https://251acafd6a0b47f6b7b963e40eec84c9.apigw.ntruss.com/custom/v1/6312/bf1e35694959687c452a73a993b245ce8d7fb9fbd6f758d1c9ffad6b957dfc51/infer";
             const requestConfig = {
                 url:url,
                 method:'POST',
                 headers: {
                     "Content-Type":"application/json",
-                    "X-OCR-SECRET": "aVNoa2xKVkxNa3hYYW55UFFmZGhabnhTZkxsbnZKeXM="
+                    "X-OCR-SECRET":"UnJTTkJUTUl0b0RTSmltQXJsbE1ZSWhJbVdZbnVNVVQ="
                 },
                 json: {
                     "version": "V1",
@@ -182,16 +181,19 @@ function ptt(filepath) {
                     console.log(err);
                     return;
                 }
-                console.log("body:"+body);
-                console.log("reponse:"+response);
-                const myJson = JSON.stringify(body);
-                console.log("@@@@@@in REQUEST#####");
-                console.log("myJson:"+myJson);
                 
-                //console.log(myJson.ParsedResults);
-                //console.log(myJson.ParsedResults[0].ParsedText);
-                //resolve(myJson.ParsedResults[0].ParsedText);
-                //console.log(body);
+                var images = body.images;
+                var arr=[];
+                console.log("@@@@@@@@@@@@@@@@@");
+                for(var k = 0; k < images.length; k++) {
+                    for(var z = 0; z < images[k].fields.length; z++) {
+                        console.log(images[k].fields[z].inferText);
+                        arr.push(images[k].fields[z].inferText);
+                    }
+                }
+
+                console.log("###################");
+                resolve(arr)
             });
         })
         .catch( (error) => {
@@ -202,23 +204,11 @@ function ptt(filepath) {
 
 
 
-app.post('/api/photo',upload.single('photoBlob'),(req,res) => {
-
-    console.log("######About to start to call PTT#####");
-    ptt("./uploads/"+req.file.originalname)
-    .then(function (result){
-        console.log("resolve result:"+result);
-        //res.send(result);
-        res.json({"text": result })
-        console.log("result:"+result);
-        //const myJson  = JSON.stringify(response.data);
-        //console.log()
+app.post('/api/photo', upload.single('photoBlob'), function(req,res) {
+    ptt("./uploads/"+req.file.originalname).then(function(result) {
+        console.log(result);
+        res.send(result);
     })
-
-    
-
-
-
 });
 
 
