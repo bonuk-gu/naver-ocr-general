@@ -31,13 +31,13 @@ function hand_ptt(filepath) {
     return new Promise(resolve => {
         imageToBase64(filepath)
         .then((response) => {
-            const url = "https://251acafd6a0b47f6b7b963e40eec84c9.apigw.ntruss.com/custom/v1/6312/bf1e35694959687c452a73a993b245ce8d7fb9fbd6f758d1c9ffad6b957dfc51/infer";
+            const url = "https://251acafd6a0b47f6b7b963e40eec84c9.apigw.ntruss.com/custom/v1/6243/820e40bd5bc75cd1e8159211ebbfbca5530d141810ec0b1b4529acf4d9ec84af/general";
             const requestConfig = {
                 url:url,
                 method:'POST',
                 headers: {
                     "Content-Type":"application/json",
-                    "X-OCR-SECRET":"UnJTTkJUTUl0b0RTSmltQXJsbE1ZSWhJbVdZbnVNVVQ="
+                    "X-OCR-SECRET":"YlNzc05LdnNxbkhKRHdSS1RVcUhBYklwRG5RRnZoQ3I="
                 },
                 json: {
                     "version": "V1",
